@@ -5,23 +5,23 @@ VERSION = 23
 PACKAGEVERSION = $(VERSION)-0~$(DISTRIBUTION)0
 
 %:
-    dh $@
+	dh $@
 
 overrrise_dh_auto_configure:
-    mkdir -p debian/build
-    cd debian/build && meson --prefix=/usr ../../mesa/mesa
+	mkdir -p debian/build
+	cd debian/build && meson --prefix=/usr ../../mesa/mesa
 
 override_dh_auto_clean:
-    rm -rf debian/build
+	rm -rf debian/build
 
 override_dh_auto_build:
-    cd debian/build && ninja -v
+	cd debian/build && ninja -v
 
 override_dh_auto_test:
-    cd debian/build && ninja test
+	cd debian/build && ninja test
  
 override_dh_auto_install:
-    cd debian/build && DESTDIR=${CURDIR}/debian/#!/usr/bin/make -f
+	cd debian/build && DESTDIR=${CURDIR}/debian/#!/usr/bin/make -f
 # -*- makefile -*-
 # Sample debian/rules that uses debhelper.
 # This file was originally written by Joey Hess and Craig Small.
@@ -49,5 +49,4 @@ override_dh_auto_test:
 	cd debian/build && ninja test
 
 override_dh_auto_install:
-	cd debian/build && DESTDIR=${CURDIR}/debian/abelardoj 
- ninja install
+	cd debian/build && DESTDIR=${HOME}/builds ninja install
