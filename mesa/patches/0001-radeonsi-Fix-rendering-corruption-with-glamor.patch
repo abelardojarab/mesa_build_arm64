@@ -1,0 +1,29 @@
+From 453197295e15feef5f470690a59206d2dd0ae185 Mon Sep 17 00:00:00 2001
+From: Jon Nettleton <jon@solid-run.com>
+Date: Tue, 10 Nov 2020 06:25:00 +0100
+Subject: [PATCH] radeonsi: Fix rendering corruption with glamor
+
+Signed-off-by: Jon Nettleton <jon@solid-run.com>
+---
+ src/gallium/drivers/radeonsi/si_buffer.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/gallium/drivers/radeonsi/si_buffer.c b/src/gallium/drivers/radeonsi/si_buffer.c
+index e64b51d8d0a..d053140fb07 100644
+--- a/src/gallium/drivers/radeonsi/si_buffer.c
++++ b/src/gallium/drivers/radeonsi/si_buffer.c
+@@ -151,6 +151,11 @@ void si_init_resource_fields(struct si_screen *sscreen, struct si_resource *res,
+        */
+       if (!sscreen->info.kernel_flushes_hdp_before_ib || !sscreen->info.is_amdgpu)
+          res->domains = RADEON_DOMAIN_GTT;
++
++#if defined(PIPE_ARCH_AARCH64)
++      if ( size <= 1024 * 1024 )
++         res->domains = RADEON_DOMAIN_GTT;
++#endif
+    }
+ 
+    /* Tiled textures are unmappable. Always put them in VRAM. */
+-- 
+2.28.0
+
