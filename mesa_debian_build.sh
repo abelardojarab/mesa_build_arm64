@@ -2,7 +2,7 @@
 
 mesa_branch=${mesa_branch:-"master"}
 mesa_repo=${mesa_repo:-"https://gitlab.freedesktop.org/mesa/mesa.git"}
-base_dir=${src_dir:-"${HOME}/workspace/mesa_build_dir/mesa"}
+base_dir=${src_dir:-"${HOME}/workspace/mesa_build_arm64/mesa"}
 src_dir=${src_dir:-"${base_dir}/mesa"}
 build_dir=${build_dir:-"${base_dir}/build"}
 patches_dir=${patches_dir:-"${base_dir}/patches"}
