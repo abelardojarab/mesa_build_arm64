@@ -2,5 +2,5 @@ Source: mesa
 Maintainer: Abelardo Jara-Berrocal <abelardoj@nvidia.com>
 
 Package: mesa
-Architecture: any
+Architecture: arm64
 Description: Mesa with patch for Honeycomb LX2
