@@ -1,29 +1,5 @@
 #!/bin/bash
 
-# Notes:
-#
-# 1. Works for tags and specific hash commits too (override mesa_branch variable with needed value).
-#
-# 2. By default builds for /opt/mesa-<branch> and places the result in ${HOME}/mnt/vmshare/mesa-<branch>
-#    You can override the build deployment location by setting dest_dir. For example this should put it right away
-#    in /opt/mesa-<branch>
-#
-#    dest_dir=/ mesa_debian_build.sh
-#
-# 3. You can override the Mesa repo and resulting Mesa directory name. For example, to build Mesa-aco
-#    for testing the new shader compiler:
-#
-#    mesa_repo='https://github.com/daniel-schuermann/mesa.git' src_dir="${HOME}/build/mesa-aco" mesa_dir='/opt/mesa-aco' mesa_debian_build.sh
-#
-# 4. To use latest llvm snapshot, make sure to configure llvm respository for Debian.
-#    For example, create the following apt list: /etc/apt/sources.list.d/llvm.list
-#
-# deb http://apt.llvm.org/unstable/ llvm-toolchain main
-# deb-src http://apt.llvm.org/unstable/ llvm-toolchain main
-#
-# 5. Make sure deb-src section is configured for your Debian distro in your apt sources. That's needed to install build development packages.
-#
-
 mesa_branch=${mesa_branch:-"master"}
 mesa_repo=${mesa_repo:-"https://gitlab.freedesktop.org/mesa/mesa.git"}
 base_dir=${src_dir:-"${HOME}/workspace/mesa"}
@@ -47,15 +23,12 @@ else
 fi
 
 if [[ "$mesa_branch" != "mesa"* ]]; then
-   #mesa_dir=${mesa_dir:-"/opt/mesa-${mesa_branch}"}
    mesa_dir=${mesa_dir:-"/usr"}
 else
-   mesa_dir=${mesa_dir:-"/opt/${mesa_branch}"}
    mesa_dir=${mesa_dir:-"/usr"}
 fi
 
 dest_dir=${dest_dir:-"${HOME}/builds/mesa"}
-
 arch_dir["64"]="lib/aarch64-linux-gnu"
 
 function assert() {
