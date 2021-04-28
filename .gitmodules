@@ -1,3 +1,6 @@
 [submodule "mesa/mesa"]
 	path = mesa/mesa
 	url = https://gitlab.freedesktop.org/mesa/mesa
+[submodule "mesa/drm"]
+	path = mesa/drm
+	url = https://gitlab.freedesktop.org/mesa/drm
