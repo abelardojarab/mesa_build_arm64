@@ -1,1 +1,7 @@
 mesa/build/*
+debian/.debhelper/*
+debian/build
+debian/mesa.substvars
+debian/mesa/*
+debian/debhelper-build-stamp
+debian/files
