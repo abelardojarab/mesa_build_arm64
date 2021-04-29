@@ -1,6 +1,6 @@
 # debian/changelog
-mesa (23.0.0-0) stable; urgency=low
+mesa (23.0.0-0) unstable; urgency=medium
 
   * Release 23.0.0
 
- -- Abelardo Jara-Berrocal <abelardoj@nvidia.com>  Thu, 23 Apr 2021 10:00:00 +0100
+ -- Abelardo Jara-Berrocal <abelardoj@nvidia.com>  Wed, 28 Apr 2021 10:00:00 +0100

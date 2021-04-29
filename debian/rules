@@ -9,7 +9,42 @@ PACKAGEVERSION = $(VERSION)-0~$(DISTRIBUTION)0
 
 overrrise_dh_auto_configure:
 	mkdir -p debian/build
-	cd debian/build && meson --prefix=/usr ../../mesa/mesa
+	cd debian/build && meson --prefix=/usr \
+--wrap-mode=nodownload \
+--sysconfdir=/etc \
+--localstatedir=/var \
+--libdir=lib/aarch64-linux-gnu \
+--libexecdir=lib/aarch64-linux-gnu \
+-Ddri-drivers=nouveau \
+-Ddri-drivers-path=lib/aarch64-linux-gnu \
+-Dglvnd=true \
+-Dshared-glapi=enabled \
+-Dgallium-xvmc=enabled \
+-Dgallium-vdpau=enabled \
+-Dgallium-omx=disabled \
+-Dglx-direct=true \
+-Dgbm=enabled \
+-Ddri3=enabled \
+"-Dplatforms=x11,wayland" \
+-Dllvm=enabled \
+-Dshared-llvm=disabled \
+-Dgallium-extra-hud=true \
+-Dgallium-vdpau=enabled \
+-Dgallium-va=enabled \
+-Dva-libs-path=lib/aarch64-linux-gnu \
+-Dlmsensors=enabled \
+"-Dgallium-drivers=radeonsi,r600,nouveau,zink,swrast,virgl" \
+-Dgles1=disabled \
+-Dgles2=enabled \
+-Dvulkan-drivers=auto \
+"-Dvulkan-layers=device-select,overlay" \
+-Dosmesa=true \
+-Dgallium-nine=true \
+-Dshader-cache=enabled \
+-Dopencl-spirv=true \
+-Dgallium-opencl=disabled \
+-Dtools=glsl,nir \
+../../mesa/mesa
 
 override_dh_auto_clean:
 	rm -rf debian/build
@@ -19,7 +54,7 @@ override_dh_auto_build:
 
 override_dh_auto_test:
 	cd debian/build && ninja test
- 
+
 override_dh_auto_install:
 	cd debian/build && DESTDIR=${CURDIR}/debian/#!/usr/bin/make -f
 # -*- makefile -*-
@@ -36,7 +71,41 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	mkdir -p debian/build
-	cd debian/build && meson --prefix=/usr ../../mesa/mesa
+	cd debian/build && meson --prefix=/usr --wrap-mode=nodownload \
+--sysconfdir=/etc \
+--localstatedir=/var \
+--libdir=lib/aarch64-linux-gnu \
+--libexecdir=lib/aarch64-linux-gnu \
+-Ddri-drivers=nouveau \
+-Ddri-drivers-path=lib/aarch64-linux-gnu \
+-Dglvnd=true \
+-Dshared-glapi=enabled \
+-Dgallium-xvmc=enabled \
+-Dgallium-vdpau=enabled \
+-Dgallium-omx=disabled \
+-Dglx-direct=true \
+-Dgbm=enabled \
+-Ddri3=enabled \
+"-Dplatforms=x11,wayland" \
+-Dllvm=enabled \
+-Dshared-llvm=disabled \
+-Dgallium-extra-hud=true \
+-Dgallium-vdpau=enabled \
+-Dgallium-va=enabled \
+-Dva-libs-path=lib/aarch64-linux-gnu \
+-Dlmsensors=enabled \
+"-Dgallium-drivers=radeonsi,r600,nouveau,zink,swrast,virgl" \
+-Dgles1=disabled \
+-Dgles2=enabled \
+-Dvulkan-drivers=auto \
+"-Dvulkan-layers=device-select,overlay" \
+-Dosmesa=true \
+-Dgallium-nine=true \
+-Dshader-cache=enabled \
+-Dopencl-spirv=true \
+-Dgallium-opencl=disabled \
+-Dtools=glsl,nir \
+../../mesa/mesa
 
 override_dh_auto_build:
 	cd debian/build && ninja -v
