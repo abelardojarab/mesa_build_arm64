@@ -10,3 +10,6 @@ https://github.com/abelardojarab/mesa_build_arm64/blob/master/mesa/patches/0001-
 ```
 $ debuild -us -uc
 ```
+# Note
+
+Be sure that `llvm-10-tools` is not installed as `cmake` defaults to oldest `llvm` installation.
