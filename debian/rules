@@ -9,12 +9,20 @@ PACKAGEVERSION = $(VERSION)-0~$(DISTRIBUTION)0
 
 overrrise_dh_auto_configure:
 	mkdir -p debian/build
-	cd debian/build && meson --prefix=/usr \
+	cd debian/build
+	export native_config
+	read -r -d '' native_config <<EOF \
+[binaries] \
+llvm-config = '/usr/bin/llvm-config-12' \
+EOF
+	meson --prefix=/usr \
 --wrap-mode=nodownload \
 --sysconfdir=/etc \
 --localstatedir=/var \
 --libdir=lib/aarch64-linux-gnu \
 --libexecdir=lib/aarch64-linux-gnu \
+--native-file=<(echo "$native_config") \
+-Dlibunwind=disabled \
 -Ddri-drivers=nouveau \
 -Ddri-drivers-path=lib/aarch64-linux-gnu \
 -Dglvnd=true \
@@ -26,15 +34,13 @@ overrrise_dh_auto_configure:
 -Dgbm=enabled \
 -Ddri3=enabled \
 "-Dplatforms=x11,wayland" \
--Dllvm=enabled \
--Dshared-llvm=disabled \
 -Dgallium-extra-hud=true \
 -Dgallium-vdpau=enabled \
 -Dgallium-va=enabled \
 -Dva-libs-path=lib/aarch64-linux-gnu \
 -Dlmsensors=enabled \
 "-Dgallium-drivers=radeonsi,r600,nouveau,zink,swrast,virgl" \
--Dgles1=disabled \
+-Dgles1=enabled \
 -Dgles2=enabled \
 -Dvulkan-drivers=auto \
 "-Dvulkan-layers=device-select,overlay" \
@@ -71,11 +77,19 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	mkdir -p debian/build
-	cd debian/build && meson --prefix=/usr --wrap-mode=nodownload \
+	cd debian/build
+	export native_config
+	read -r -d '' native_config <<EOF \
+[binaries] \
+llvm-config = '/usr/bin/llvm-config-12' \
+EOF
+	meson --prefix=/usr --wrap-mode=nodownload \
 --sysconfdir=/etc \
 --localstatedir=/var \
 --libdir=lib/aarch64-linux-gnu \
 --libexecdir=lib/aarch64-linux-gnu \
+--native-file=<(echo "$native_config") \
+-Dlibunwind=disabled \
 -Ddri-drivers=nouveau \
 -Ddri-drivers-path=lib/aarch64-linux-gnu \
 -Dglvnd=true \
@@ -87,15 +101,13 @@ override_dh_auto_configure:
 -Dgbm=enabled \
 -Ddri3=enabled \
 "-Dplatforms=x11,wayland" \
--Dllvm=enabled \
--Dshared-llvm=disabled \
 -Dgallium-extra-hud=true \
 -Dgallium-vdpau=enabled \
 -Dgallium-va=enabled \
 -Dva-libs-path=lib/aarch64-linux-gnu \
 -Dlmsensors=enabled \
 "-Dgallium-drivers=radeonsi,r600,nouveau,zink,swrast,virgl" \
--Dgles1=disabled \
+-Dgles1=enabled \
 -Dgles2=enabled \
 -Dvulkan-drivers=auto \
 "-Dvulkan-layers=device-select,overlay" \

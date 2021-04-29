@@ -126,6 +126,7 @@ $strip_option \
 --localstatedir=/var \
 --libdir="${arch_dir["64"]}" \
 --libexecdir="${arch_dir["64"]}" \
+-Dlibunwind=disabled \
 -Db_ndebug=$ndebug \
 -Ddri-drivers=nouveau \
 -Ddri-drivers-path="${arch_dir["64"]}" \
@@ -138,8 +139,6 @@ $strip_option \
 -Dgbm=enabled \
 -Ddri3=enabled \
 "-Dplatforms=x11,wayland" \
--Dllvm=enabled \
--Dshared-llvm=disabled \
 -Dgallium-extra-hud=true \
 -Dgallium-vdpau=enabled \
 -Dgallium-va=enabled \
@@ -194,4 +193,3 @@ configure_64
 build
 publish
 clean_64
-
